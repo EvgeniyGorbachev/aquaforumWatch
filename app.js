@@ -1,13 +1,15 @@
-var express = require('express');
+var conf = {
+    url: 'http://www.aquaforum.ua/forumdisplay.php?f=709', //aquaforum sales page
+    period: 120,                                           //watching period in sec.
+    email: 'webvagus@gmail.com'                            //email for send
+};
+
 var cheerio = require('cheerio');
-
-var nodemailer = require('nodemailer');
-var transporter = nodemailer.createTransport('smtps://postmaster@sandboxd9a4ef7df6404def898aa18d119cbb4d.mailgun.org:5f597779f2b3b6497488a45c8feebea9@smtp.mailgun.org');
-
 var request = require('request');
-var app = express();
-
+var nodemailer = require('nodemailer');
 var Iconv = require('iconv').Iconv;
+
+var transporter = nodemailer.createTransport('smtps://postmaster@sandboxd9a4ef7df6404def898aa18d119cbb4d.mailgun.org:5f597779f2b3b6497488a45c8feebea9@smtp.mailgun.org');
 
 var fromEnc = 'cp1251';
 var toEnc = 'utf-8';
@@ -17,19 +19,10 @@ var translator = new Iconv(fromEnc,toEnc);
 var Datastore = require('nedb');
 db = new Datastore({ filename: 'data.db' , autoload: true});
 
-//aquaforum sales page
-var url = 'http://www.aquaforum.ua/forumdisplay.php?f=709';
-
-//watching period in sec.
-var period = 120;
-
-//email for send
-var email = 'webvagus@gmail.com';
-
 function sendEmail (textSubject, theme) {
     var mailOptions = {
         from: '"Aquaforum watch 👥" <aquaforum@watch.com>', // sender address 
-        to: email, // list of receivers 
+        to: conf.email, // list of receivers 
         subject: textSubject, // Subject line 
         text: theme.title, // plaintext body
         html: '<a href="http://www.aquaforum.ua/showthread.php?t=' + theme.link_id + '">hurry up...</a>'
@@ -74,6 +67,6 @@ function pageParse (url) {
 
 //start watching
 setInterval(function(){
-    pageParse(url);
+    pageParse(conf.url);
     console.log('Parse each 2 minutes!');
-}, period * 1000);
+}, conf.period * 1000);

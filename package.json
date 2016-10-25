@@ -3,18 +3,17 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node app.js"
   },
   "dependencies": {
     "cheerio": "^0.20.0",
-    "express": "~4.13.4",
     "iconv": "^2.2.1",
     "nedb": "^1.8.0",
     "nodemailer": "^2.5.0",
     "request": "^2.74.0"
   },
-  "main": "index.js",
-  "author": "",
+  "main": "app.js",
+  "author": "webvagus@gmail.com",
   "license": "ISC",
   "description": ""
 }
