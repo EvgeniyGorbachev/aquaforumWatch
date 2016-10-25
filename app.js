@@ -15,16 +15,8 @@ var toEnc = 'utf-8';
 
 var translator = new Iconv(fromEnc,toEnc);
 
-var mysql      = require('mysql');
-
-var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : '',
-    database : 'aquaforum_parse'
-});
-
-connection.connect();
+var Datastore = require('nedb');
+db = new Datastore({ filename: 'data.db' , autoload: true});
 
 //aquaforum sales
 var url = 'http://www.aquaforum.ua/forumdisplay.php?f=709';
@@ -63,25 +55,23 @@ function pageParse (url) {
                         title: $(value).text()
                     };
 
-                    connection.query('SELECT * FROM parse_data WHERE link_id = ?', [theme.link_id],function(err, rows, fields) {
-                        if (err) throw err;
-
-                        if (rows.length == 0) {
-                            connection.query('INSERT INTO parse_data SET ?', theme, function(err, result) {
-                                if (err) throw err;
+                    db.find(theme, function (err, docs) {
+                        if (docs.length == 0) {
+                            db.insert([theme], function (err) {
                                 sendEmail('A new theme on aquaforum!', theme);
                             });
-
                         }
                     });
                 });
             }
         });
 }
+pageParse(url);
+// setInterval(function(){
+//     pageParse(url);
+//     console.log('Parse each 2 minutes!');
+// }, 120000);
 
-setInterval(function(){
-    pageParse(url);
-    console.log('Parse each 2 minutes!');
-}, 120000);
+
 
 module.exports = app;
