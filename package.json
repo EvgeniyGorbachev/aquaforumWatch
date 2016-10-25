@@ -1,0 +1,20 @@
+{
+  "name": "aquaforum.app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "express": "~4.13.4",
+    "cheerio": "^0.20.0",
+    "nodemailer": "^2.5.0",
+    "request": "^2.74.0",
+    "iconv": "^2.2.1",
+    "mysql": "^2.11.1"
+  },
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
