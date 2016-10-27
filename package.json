@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "cheerio": "^0.20.0",
-    "iconv": "^2.2.1",
     "nedb": "^1.8.0",
     "nodemailer": "^2.5.0",
     "request": "^2.74.0"
