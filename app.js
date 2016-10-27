@@ -47,7 +47,6 @@ function pageParse (url) {
 
                     db.find(theme, function (err, docs) {
                         if (docs.length == 0) {
-                            console.log($(value).attr('id').split('_')[2]);
                             db.insert([theme], function (err) {
                                 sendEmail('A new theme on aquaforum!', theme);
                             });
