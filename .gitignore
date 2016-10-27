@@ -1,2 +1,5 @@
 node_modules
 .idea
+.gitignore.save
+npm-debug.log
+
