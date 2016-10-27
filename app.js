@@ -57,10 +57,11 @@ function pageParse (url) {
         });
 }
 
-pageParse(conf.url);
-
 //start watching
 setInterval(function(){
     pageParse(conf.url);
     console.log('Parse each 1 minutes!');
+
+    global.gc();
+    console.log('Memory usage:', process.memoryUsage());
 }, conf.period * 1000);
