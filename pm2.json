@@ -2,7 +2,7 @@
   "apps": [
     {
       "name": "aquaforumWatcher",
-      "script": "/var/www/aquaforum.local/app.js",
+      "script": "/var/www/html/aquaforumWatch.local/aquaforumWatch/app.js",
       "log_date_format" : "YYYY-MM-DD HH:mm",
       "node_args": "--expose-gc",
       "max_memory_restart": "100M"
